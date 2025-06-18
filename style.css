@@ -1,0 +1,630 @@
+/* Переменные для легкой настройки цветов и теней */
+:root {
+    --primary-color: #6C88B0;      /* French Ultramarine Blue (Red Shade) - Более спокойный синий */
+    --secondary-color: #7AAAB9;    /* Ultramarine Turquoise - Более приглушенный бирюзовый */
+    --accent-color: #D47B6A;       /* Quinacridone Coral - Спокойный, теплый акцент */
+    --text-color-dark: #3F4752;    /* Темный сине-серый для основного текста (ближе к Ludvig Black) */
+    --text-color-light: #FBFBFB;   /* Почти белый для текста на темном фоне */
+    --bg-light-gray: #F5F0EC;      /* Очень светлый кремовый/серый - основной фон (немного теплее) */
+    --bg-medium-gray: #E0E7ED;     /* Светлый сине-серый - для hero-section (менее насыщенный) */
+    --bg-dark-gray: #3B4B5E;       /* Темный синий/индиго - для футера (более мягкий) */
+    --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.12);
+    --shadow-strong: 0 12px 24px rgba(0, 0, 0, 0.18);
+    --accent-color-darken: #BD6A5E; /* Более темный оттенок для акцента */
+}
+
+/* Общие стили и сброс */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Consolas, monospace;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--text-color-dark);
+    background-color: var(--bg-light-gray); /* Основной фон */
+    min-height: 100vh; /* Минимальная высота для Grid */
+    display: grid; /* Используем Grid для основной компоновки Body */
+    grid-template-rows: auto 1fr auto; /* Header, Main (гибкий), Footer */
+}
+
+.hero-section .quote-text {
+    font-size: 1.3em;
+    color: var(--text-color-dark);
+    margin-bottom: 20px; /* Отступ от цитаты до блока с автором/кнопкой */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-section .author-and-button {
+    display: flex; /* Используем Flexbox */
+    justify-content: center; /* Центрируем содержимое этого Flex-контейнера */
+    align-items: center; /* Выравниваем по вертикали */
+    gap: 20px; /* Расстояние между автором и кнопкой */
+    margin-bottom: 40px; /* Отступ от этого блока до следующего (если есть) */
+}
+
+.hero-section .quote-author {
+    font-size: 1em;
+    color: #666; /* Или var(--text-color-dark) */
+    /* Убираем margin-bottom, так как Flexbox управляет расстоянием */
+    margin-bottom: 0;
+}
+
+main {
+    display: contents; /* Позволяет секциям внутри main быть прямыми потомками body для grid */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+h1 {
+    font-size: 2.8em;
+}
+
+h2 {
+    font-size: 2.2em;
+}
+
+h3 {
+    font-size: 1.6em;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+
+/* Стилизация кнопок */
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 8px; /* Более скругленные, как на макете */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-light);
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.primary-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+}
+
+.secondary-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.small-button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    background-color: var(--accent-color);
+    color: var(--text-color-dark);
+    box-shadow: none; /* Не хотим сильной тени на мелких кнопках */
+}
+
+.small-button:hover {
+    background-color: var(--accent-color-darken);
+    transform: translateY(-1px);
+}
+
+.large-button {
+    padding: 16px 35px;
+    font-size: 1.3em;
+    margin-top: 30px;
+}
+
+/* Стилизация ссылок */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* --- Header (Шапка сайта) --- */
+.main-header {
+    background-color: var(--text-color-light); /* Белый фон */
+    padding: 15px 0;
+    box-shadow: var(--shadow-light);
+    text-align: center; /* Центрируем содержимое в примере */
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header .logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* --- Hero Section (Первый экран) --- */
+.hero-section {
+    background-color: var(--bg-medium-gray); /* Фоновый цвет, близкий к макету */
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Чтобы декоративные элементы не выходили за границы */
+}
+
+.hero-section .container {
+    max-width: 900px;
+    position: relative;
+    z-index: 1; /* Чтобы контент был поверх фоновых декораций */
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 3.5em;
+    color: var(--text-color-dark);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.hero-section p {
+    font-size: 1.3em;
+    color: var(--text-color-dark);
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Декоративный элемент поиска (имитация) */
+.hero-section .decorative-search-bar {
+    background-color: var(--text-color-light);
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    box-shadow: var(--shadow-light);
+}
+
+.hero-section .decorative-search-bar input {
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    padding: 5px 0;
+    flex-grow: 1;
+}
+
+.hero-section .decorative-search-bar .search-icon {
+    color: var(--secondary-color);
+    font-size: 1.4em;
+}
+
+
+/* --- Features Section (Особенности/Преимущества) --- */
+.features-section {
+    background-color: var(--text-color-light); /* Белый фон */
+    padding: 80px 0;
+    text-align: center;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    display: grid; /* Используем Grid для равномерного распределения фичей */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.feature-item {
+    background-color: var(--bg-light-gray);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Для псевдоэлементов */
+}
+
+.feature-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Иконки для фичей (пример с использованием Font Awesome или Placeholder) */
+.feature-item .icon {
+    font-size: 3.5em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block; /* Чтобы отступы применялись корректно */
+}
+
+/* Если используете Font Awesome: */
+.icon-books::before { content: "\f02d"; font-family: "Font Awesome 5 Free"; font-weight: 900; }
+.icon-search::before { content: "\f002"; font-family: "Font Awesome 5 Free"; font-weight: 900; }
+.icon-recommendation::before { content: "\f005"; font-family: "Font Awesome 5 Free"; font-weight: 900; }
+.icon-devices::before { content: "\f10a"; font-family: "Font Awesome 5 Free"; font-weight: 900; }
+.icon-chat::before { content: "\f086"; font-family: "Font Awesome 5 Free"; font-weight: 900; }
+
+/* Продвинутые селекторы: ::before и ::after для декоративных элементов на карточках фичей */
+.feature-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+}
+
+.feature-item:hover::before {
+    transform: scaleX(1);
+}
+
+/* --- Popular Books Section (Популярные книги) --- */
+.popular-books-section {
+    background-color: var(--bg-light-gray);
+    padding: 80px 0;
+    text-align: center;
+}
+
+.books-grid {
+    display: grid; /* Grid для обложек книг */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Адаптивные колонки */
+    gap: 25px;
+    margin-top: 50px;
+    justify-content: center; /* Центрирование карточек если их меньше, чем может поместиться */
+}
+
+.book-card {
+    background-color: var(--text-color-light);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Для закладок */
+    overflow: hidden; /* Для тени и border-radius */
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.book-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Тень для обложки */
+}
+
+.book-card h3 {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: var(--text-color-dark);
+    min-height: 2.2em; /* Чтобы заголовки были примерно одной высоты */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Ограничить 2 строками */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-card p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Продвинутые селекторы: закладка на книге (имитация) */
+.book-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 15px; /* Немного отступаем от края */
+    border-top: 30px solid var(--accent-color);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    width: 0;
+    height: 0;
+    transform: translateY(-100%); /* Скрыта по умолчанию */
+    transition: transform 0.3s ease-out;
+}
+
+.book-card:hover::after {
+    transform: translateY(0); /* Появляется при наведении */
+}
+
+.view-all-button {
+    margin-top: 40px;
+}
+
+/* --- Call to Action Section (Призыв к действию) --- */
+.call-to-action-section {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.call-to-action-section h2,
+.call-to-action-section p {
+    color: var(--text-color-light);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.call-to-action-section p {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+
+.cta-info-blocks {
+    display: flex; /* Flexbox для информационных блоков */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.info-block {
+    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
+    padding: 25px;
+    border-radius: 10px;
+    flex: 1 1 350px; /* Гибкие блоки, мин. 350px */
+    max-width: 450px;
+    box-shadow: var(--shadow-light);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-block h3 {
+    color: var(--accent-color);
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    text-shadow: none;
+}
+
+.info-block p {
+    color: var(--text-color-light);
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    text-shadow: none;
+}
+
+.info-block .button {
+    align-self: flex-start; /* Прижать кнопку к левому краю */
+    background-color: var(--accent-color);
+    color: var(--text-color-dark);
+    box-shadow: none;
+}
+
+.info-block .button:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+/* --- Footer (Подвал сайта) --- */
+.main-footer {
+    background-color: var(--bg-dark-gray);
+    color: var(--text-color-light);
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.main-footer .container {
+    display: flex;
+    flex-direction: column; /* На мобильных будет колонка */
+    align-items: center;
+    gap: 20px;
+}
+
+.main-footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; /* Для переноса ссылок на мобильных */
+    justify-content: center;
+    gap: 25px;
+}
+
+.footer-links li a {
+    color: var(--text-color-light);
+    font-size: 0.9em;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer-links li a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Продвинутые селекторы: стиль для каждого четного элемента списка в футере */
+.footer-links li:nth-child(even) a {
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.footer-links li:nth-child(odd) a {
+    opacity: 0.8;
+}
+
+/* --- Адаптивность с Media Queries --- */
+
+/* Планшеты (меньше 992px) */
+@media (max-width: 992px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .hero-section {
+        padding: 80px 0;
+    }
+
+    .features-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .cta-info-blocks {
+        flex-direction: column; /* Блоки призыва к действию в колонку */
+        align-items: center;
+    }
+
+    .info-block {
+        flex: 0 1 90%; /* Занимают почти всю ширину */
+        max-width: 500px;
+    }
+}
+
+/* Мобильные устройства (меньше 768px) */
+@media (max-width: 768px) {
+    section {
+        padding: 50px 0;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+
+    .hero-section {
+        padding: 60px 0;
+    }
+
+    .hero-section p {
+        font-size: 1.1em;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .features-list {
+        grid-template-columns: 1fr; /* Фичи в одну колонку */
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Чуть меньше размер карточек */
+        gap: 15px;
+    }
+
+    .book-card::after {
+        right: 10px; /* Отступ закладки */
+    }
+
+    .main-footer .container {
+        gap: 15px;
+    }
+
+    .footer-links {
+        flex-direction: column; /* Ссылки футера в колонку */
+        gap: 10px;
+    }
+}
+
+/* Совсем маленькие экраны (меньше 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    .hero-section .decorative-search-bar {
+        padding: 8px 15px;
+    }
+
+    .hero-section .decorative-search-bar input {
+        font-size: 1em;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr); /* Две колонки на очень маленьких экранах */
+    }
+
+    .book-card img {
+        max-width: 90%;
+    }
+}
